@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react';
 import type { CountryCode, CountryOptions } from '../types';
 import { countries } from '../data/countries';
 import { calculate } from '../calculators';
-import CountrySelector from '../components/CountrySelector';
 import IncomeInput from '../components/IncomeInput';
 import CompareView from '../components/CompareView';
 import Disclaimer from '../components/Disclaimer';

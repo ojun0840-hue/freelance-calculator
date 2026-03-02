@@ -2,7 +2,7 @@ import type { CalculationResult, CountryOptions } from '../types';
 
 export function calculatePortugal(
   annualRevenue: number,
-  expenses: number,
+  _expenses: number,
   options: CountryOptions
 ): CalculationResult {
   // Simplified Regime: 75% of revenue = taxable income
