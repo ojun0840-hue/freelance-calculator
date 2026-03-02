@@ -33,13 +33,13 @@ export function calculateGermany(
   const churchTax = options.churchTax ? Math.round(incomeTax * 0.09) : 0;
 
   // === Health Insurance ===
-  const healthCeiling = 69750;
+  const healthCeiling = 66150; // 2025 ceiling
   const healthBase = Math.min(taxableIncome, healthCeiling);
-  const healthRate = 0.163;
+  const healthRate = 0.171; // 14.6% base + 2.5% average Zusatzbeitrag (2025)
   const healthInsurance = Math.round(healthBase * healthRate);
 
   // === Care Insurance ===
-  const careRate = options.hasChildren ? 0.036 : 0.042;
+  const careRate = options.hasChildren ? 0.034 : 0.040; // 2025 rates
   const careInsurance = Math.round(healthBase * careRate);
 
   // === Total ===
@@ -54,8 +54,8 @@ export function calculateGermany(
     effectiveRate: annualRevenue > 0 ? Math.round((totalDeductions / annualRevenue) * 1000) / 10 : 0,
     breakdown: [
       { label: 'Income Tax', amount: incomeTax, tooltip: 'Progressive tax from 14% to 45%. First €12,096 is tax-free (Grundfreibetrag).', color: '#ef4444' },
-      { label: 'Health Insurance', amount: healthInsurance, tooltip: 'Public health insurance (GKV). Freelancers pay the full 16.3% (no employer share). Capped at €69,750 income.', color: '#f97316' },
-      { label: 'Care Insurance', amount: careInsurance, tooltip: `Long-term care insurance (Pflegeversicherung). ${options.hasChildren ? '3.6%' : '4.2% (no children surcharge)'}. Same ceiling as health insurance.`, color: '#eab308' },
+      { label: 'Health Insurance', amount: healthInsurance, tooltip: 'Public health insurance (GKV). Freelancers pay 17.1% (14.6% base + 2.5% avg. Zusatzbeitrag). Capped at €66,150 income (2025).', color: '#f97316' },
+      { label: 'Care Insurance', amount: careInsurance, tooltip: `Long-term care insurance (Pflegeversicherung). ${options.hasChildren ? '3.4%' : '4.0% (childless surcharge)'}. Same ceiling as health insurance.`, color: '#eab308' },
       { label: 'Solidarity Surcharge', amount: solidarity, tooltip: 'Only applies if your income tax exceeds €19,950. Most freelancers earning under ~€73K pay zero.', color: '#8b5cf6' },
       ...(churchTax > 0 ? [{ label: 'Church Tax', amount: churchTax, tooltip: '9% of income tax. Only if registered with a recognized church.', color: '#6b7280' }] : []),
     ],

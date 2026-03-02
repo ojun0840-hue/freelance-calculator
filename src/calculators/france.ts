@@ -10,8 +10,8 @@ export function calculateFrance(
   if (isMicro) {
     // === Micro-Entreprise / Auto-Entrepreneur ===
 
-    // Social Charges: 23.1% of revenue for services
-    const socialCharges = Math.round(annualRevenue * 0.231);
+    // Social Charges: 24.6% of revenue for services (2025 rate)
+    const socialCharges = Math.round(annualRevenue * 0.246);
 
     // CFP (Professional Training): 0.2%
     const cfp = Math.round(annualRevenue * 0.002);
@@ -37,7 +37,7 @@ export function calculateFrance(
       takeHome,
       effectiveRate: annualRevenue > 0 ? Math.round((totalDeductions / annualRevenue) * 1000) / 10 : 0,
       breakdown: [
-        { label: 'Social Charges', amount: socialCharges, tooltip: 'Cotisations sociales: 23.1% of revenue for service businesses. Covers health, retirement, and family benefits.', color: '#ef4444' },
+        { label: 'Social Charges', amount: socialCharges, tooltip: 'Cotisations sociales: 24.6% of revenue for service businesses (2025 rate). Covers health, retirement, and family benefits.', color: '#ef4444' },
         { label: 'Income Tax', amount: incomeTax, tooltip: options.versementLiberatoire ? 'Versement Libératoire: flat 2.2% of revenue (opt-in).' : 'Progressive income tax on 66% of revenue (34% automatic deduction for BNC).', color: '#f97316' },
         { label: 'Professional Training (CFP)', amount: cfp, tooltip: 'Contribution à la Formation Professionnelle: 0.2% of revenue.', color: '#eab308' },
       ],
